@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: QuartzSample
+logging:
+  level:
+    root: info
