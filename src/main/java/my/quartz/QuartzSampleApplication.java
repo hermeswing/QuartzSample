@@ -14,6 +14,7 @@ import org.quartz.TriggerBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+// https://github.com/devHjlee/springboot-quartz
 @SpringBootApplication
 public class QuartzSampleApplication {
 
@@ -24,13 +25,13 @@ public class QuartzSampleApplication {
         SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
 
-        /**
-         * JobDetail 은 Job이 스케줄러에 추가될 때 Quartz Client에 의해 작성 (작업 인스턴스 정의)
-         *
-         * 또한 Job에 대한 다양한 속성 설정과 JobDataMap을 포함할 수 있으며,
-         * JobDataMap은 Job 클래스의 특정 인스턴스에 대한 상태 정보를 저장하는 데 사용
-         *     - 작업 인스턴스가 실행될 때 사용하고자 하는 데이터 개체를 원하는 만큼 보유
-         *     - Java Map interface를 구현한 것으로 원시 유형의 데이터를 저장하고 검색하기 위한 몇 가지 편의 방법이 추가
+        /*
+          JobDetail 은 Job이 스케줄러에 추가될 때 Quartz Client에 의해 작성 (작업 인스턴스 정의)
+
+          또한 Job에 대한 다양한 속성 설정과 JobDataMap을 포함할 수 있으며,
+          JobDataMap은 Job 클래스의 특정 인스턴스에 대한 상태 정보를 저장하는 데 사용
+              - 작업 인스턴스가 실행될 때 사용하고자 하는 데이터 개체를 원하는 만큼 보유
+              - Java Map interface를 구현한 것으로 원시 유형의 데이터를 저장하고 검색하기 위한 몇 가지 편의 방법이 추가
          */
         JobDetail job01 = JobBuilder.newJob( MyQuartzJob.class )
                 .withIdentity( "myJob01", "myGroup01" )
@@ -48,13 +49,13 @@ public class QuartzSampleApplication {
                 .setJobData( jobDataMap )
                 .build();
 
-        /**
-         * Job의 실행을 trigger
-         *
-         * 작업을 예약하려면 트리거를 인스턴스화하고 해당 속성을 조정하여 예약 요구 사항을 구성
-         *
-         * - 특정시간 또는 특정 횟수 반복: SimpleTrigger
-         * - 주기적 반복: CronTrigger (초 분 시 일 월 요일 연도)
+        /*
+          Job의 실행을 trigger
+
+          작업을 예약하려면 트리거를 인스턴스화하고 해당 속성을 조정하여 예약 요구 사항을 구성
+
+          - 특정시간 또는 특정 횟수 반복: SimpleTrigger
+          - 주기적 반복: CronTrigger (초 분 시 일 월 요일 연도)
          */
         Trigger trigger01 = TriggerBuilder.newTrigger()
                 .withIdentity( "myTrigger01" )

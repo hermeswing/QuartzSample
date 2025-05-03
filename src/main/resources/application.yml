@@ -15,8 +15,33 @@ spring:
     hikari:
       maximum-pool-size: 3 #최대 pool 크기
       minimum-idle: 1 #최소 pool 크기
-      idle-timeout: 600000 #연결위한 최대 유후 시간
+      idle-timeout: 600000 #연결위한 최대 유휴 시간
       max-lifetime: 1800000 #반납된 커넥션의 최대 수명
+
+#Quartz
+  quartz:
+    scheduler-name: QuartzScheduler
+    auto-startup: true
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceId: AUTO
+          threadPool:
+            threadCount: 20
+            threadNamePrefix: =QuartzScheduler
+          jobStore:
+            tablePrefix: QRTZ_
+            isClustered: false
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+            #class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            #class: org.quartz.impl.jdbcjobstore.JobStoreCMT
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            useProperties: true
+            misfireThreshold: 60000
+            clusterCheckinInterval: 15000
+
+
 logging:
   level:
     root: info

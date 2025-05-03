@@ -24,3 +24,8 @@ PostgreSQL 16.3
   - 추가적인 Quartz 샘플 작성
   - Git 소스 : https://github.com/hermeswing/QuartzSample/tree/QuartzSample_20250310
 
+* [2025-05-03] Quartz 샘플 작성
+  - PostgreSQL 16.3 연결
+  - JPA 추가
+  - Git 소스 : https://github.com/hermeswing/QuartzSample/tree/QuartzSample_20250310
+
